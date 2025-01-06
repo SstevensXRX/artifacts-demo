@@ -30,7 +30,7 @@ jobs:
         with: 
           name: BuildArtifact
           path: |
-            disk
+            dist
             package.json
   deploy:
     needs: build
