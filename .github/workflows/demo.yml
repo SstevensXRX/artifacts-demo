@@ -27,11 +27,11 @@ jobs:
         run: npm run build
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
-          with: 
-            name: BuildArtifact
-            path: |
-              disk
-              package.json
+        with: 
+          name: BuildArtifact
+          path: |
+            disk
+            package.json
   deploy:
     needs: build
     runs-on: ubuntu-latest
