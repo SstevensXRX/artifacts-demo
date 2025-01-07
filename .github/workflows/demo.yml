@@ -40,8 +40,8 @@ jobs:
     steps:
     - name: Get code
       uses: actions/checkout@v3
-    - name: report cache dir
-      run: echo ${{ needs.test.outputs.cache-dir }}
+    - name: list cache directory contents
+      run: ls -R ${{ steps.get-cache-dir.outputs.dir }}
     - name: Cache dependencies
       uses: actions/cache@v4
       id: npm-cache
