@@ -14,6 +14,10 @@ jobs:
     - name: Get npm cache directory
       id: get-cache-dir
       run: echo 'dir=$(npm config get cache)' >> $GITHUB_OUTPUT ';'
+    - name: report cache dir
+      run: echo "${{ steps.get-cache-dir.outputs.dir }}"
+    - name: list cache directory contents
+      run: ls ${{ steps.get-cache-dir.outputs.dir }}
     - name: Cache dependencies
       uses: actions/cache@v4
       with:
