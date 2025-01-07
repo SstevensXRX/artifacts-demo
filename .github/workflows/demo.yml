@@ -13,7 +13,7 @@ jobs:
       uses: actions/checkout@v3
     - name: Get npm cache directory
       id: get-cache-dir
-      run: echo 'dir=$(npm config get cache)' >> $GITHUB_OUTPUT ';'
+      run: echo "dir=$(npm config get cache)"" >> $GITHUB_OUTPUT ';'
     - name: report cache dir
       run: echo "${{ steps.get-cache-dir.outputs.dir }}"
     - name: list cache directory contents
