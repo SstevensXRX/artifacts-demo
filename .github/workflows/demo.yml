@@ -20,6 +20,7 @@ jobs:
       run: ls -R ${{ steps.get-cache-dir.outputs.dir }}
     - name: Cache dependencies
       uses: actions/cache@v4
+      id: npm-cache
       with:
         path: ${{ steps.get-cache-dir.outputs.dir }}
         key: deps-node-modules-${{ hashFiles('**/package-lock.json')}}
@@ -39,10 +40,13 @@ jobs:
     steps:
     - name: Get code
       uses: actions/checkout@v3
+    - name: report cache dir
+      run: echo ${{ needs.test.outputs.cache-dir }}
     - name: Cache dependencies
       uses: actions/cache@v4
+      id: npm-cache
       with:
-        path: /node_modules
+        path: ${{ needs.test.outputs.cache-dir }}
         key: deps-node-modules-${{ hashFiles('**/package-lock.json')}}
     - name: Install dependencies
       run: npm ci
