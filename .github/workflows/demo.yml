@@ -41,7 +41,7 @@ jobs:
     - name: Get code
       uses: actions/checkout@v3
     - name: list cache directory contents
-      run: ls -R ${{ steps.get-cache-dir.outputs.dir }}
+      run: ls -R ${{ needs.test.outputs.cache-dir }}
     - name: Cache dependencies
       uses: actions/cache@v4
       id: npm-cache
