@@ -6,13 +6,18 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    outputs:
+      cache-dir: ${{ steps.get-cache-dir.outputs.dir }}
     steps:
     - name: Get code
       uses: actions/checkout@v3
+    - name: Get npm cache directory
+      id: get-cache-dir
+      run: echo 'dir=$(npm config get cache)' >> $GITHUB_OUTPUT ';'
     - name: Cache dependencies
       uses: actions/cache@v4
       with:
-        path: ~/node_modules
+        path: ${{ steps.get-cache-dir.outputs.dir }}
         key: deps-node-modules-${{ hashFiles('**/package-lock.json')}}
     - name: Install dependencies
       run: npm ci
@@ -28,8 +33,6 @@ jobs:
     steps:
     - name: Get code
       uses: actions/checkout@v3
-    - name: Get npm cache directory
-      run: npm config get cache
     - name: Cache dependencies
       uses: actions/cache@v4
       with:
