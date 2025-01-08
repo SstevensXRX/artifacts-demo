@@ -23,7 +23,6 @@ jobs:
     - name: report cache hit
       run: echo ${{ steps.npm-cache.outputs.cache-hit }}
     - name: Install dependencies
-      if: steps.npm-cache.outputs.cache-hit != 'true'
       run: npm ci
     - name: Lint code
       run: npm run lint
@@ -68,4 +67,3 @@ jobs:
       run: echo "${{ needs.build.outputs.script-file}}"
     - name: Deploy
       run: echo "Deploying..."
-      #trigger workflow
