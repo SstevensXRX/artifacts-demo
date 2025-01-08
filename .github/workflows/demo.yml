@@ -14,10 +14,6 @@ jobs:
     - name: Get npm cache directory
       id: get-cache-dir
       run: echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
-    - name: report cache dir
-      run: echo "${{ steps.get-cache-dir.outputs.dir }}"
-    - name: list cache directory contents
-      run: ls -R ${{ steps.get-cache-dir.outputs.dir }}
     - name: Cache dependencies
       uses: actions/cache@v4
       id: npm-cache
@@ -26,8 +22,6 @@ jobs:
         key: deps-node-modules-${{ hashFiles('**/package-lock.json')}}
     - name: Install dependencies
       run: npm ci
-    - name: list cache directory contents
-      run: ls -R ${{ steps.get-cache-dir.outputs.dir }}
     - name: Lint code
       run: npm run lint
     - name: Test code
@@ -67,8 +61,6 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: BuildArtifact
-    - name: output contents
-      run: ls
     - name: output filename
       run: echo "${{ needs.build.outputs.script-file}}"
     - name: Deploy
