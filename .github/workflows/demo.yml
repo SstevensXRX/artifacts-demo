@@ -20,6 +20,8 @@ jobs:
       with:
         path: ${{ steps.get-cache-dir.outputs.dir }}
         key: deps-node-modules-${{ hashFiles('**/package-lock.json')}}
+    - name: report cache hit
+      run: echo ${{ steps.get-cache-dir.outputs.cache-hit }}
     - name: Install dependencies
       if: steps.get-cache-dir.outputs.cache-hit != 'true'
       run: npm ci
