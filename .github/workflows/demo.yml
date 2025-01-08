@@ -21,9 +21,9 @@ jobs:
         path: ${{ steps.get-cache-dir.outputs.dir }}
         key: deps-node-modules-${{ hashFiles('**/package-lock.json')}}
     - name: report cache hit
-      run: echo ${{ steps.get-cache-dir.outputs.cache-hit }}
+      run: echo ${{ steps.npm-cache.outputs.cache-hit }}
     - name: Install dependencies
-      if: steps.get-cache-dir.outputs.cache-hit != 'true'
+      if: steps.npm-cache.outputs.cache-hit != 'true'
       run: npm ci
     - name: Lint code
       run: npm run lint
